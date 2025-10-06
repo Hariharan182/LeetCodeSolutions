@@ -1,0 +1,34 @@
+class Solution {
+    private static final int[][] DIRS = {{1,0},{-1,0},{0,1},{0,-1}};
+
+    public int swimInWater(int[][] grid) {
+        int n = grid.length;
+        boolean[][] seen = new boolean[n][n];
+
+        // Priority queue stores cells ordered by elevation (grid value)
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[2]));
+        // store {r, c, elevation}
+        pq.offer(new int[]{0, 0, grid[0][0]});
+        seen[0][0] = true;
+        int time = 0;
+
+        while (!pq.isEmpty()) {
+            int[] cur = pq.poll();
+            int r = cur[0], c = cur[1], elev = cur[2];
+            // we must wait until at least this elevation/time
+            time = Math.max(time, elev);
+            if (r == n - 1 && c == n - 1) {
+                return time;
+            }
+            for (int[] d : DIRS) {
+                int nr = r + d[0], nc = c + d[1];
+                if (nr >= 0 && nr < n && nc >= 0 && nc < n && !seen[nr][nc]) {
+                    seen[nr][nc] = true;
+                    pq.offer(new int[]{nr, nc, grid[nr][nc]});
+                }
+            }
+        }
+        // Problem guarantees there is a path, so we shouldn't reach here.
+        return -1;
+    }
+}
