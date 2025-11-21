@@ -1,0 +1,39 @@
+class Solution {
+    public int countPalindromicSubsequence(String s) {
+
+        int answer = 0;
+
+        // check for each letter 'a' to 'z'
+        for (char ch = 'a'; ch <= 'z'; ch++) {
+
+            int first = -1;
+            int last = -1;
+
+            // find first and last position of this char
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == ch) {
+                    if (first == -1) first = i;
+                    last = i;
+                }
+            }
+
+            // if the char appears at least twice and has space between
+            if (first != -1 && last > first + 1) {
+
+                boolean[] seen = new boolean[26];
+
+                // look inside the middle part
+                for (int i = first + 1; i < last; i++) {
+                    seen[s.charAt(i) - 'a'] = true;
+                }
+
+                // count distinct middle characters
+                for (boolean b : seen) {
+                    if (b) answer++;
+                }
+            }
+        }
+
+        return answer;
+    }
+}
