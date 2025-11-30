@@ -1,0 +1,29 @@
+class Solution {
+    public static String ExpandCentre(String s, int left, int right,int len) {
+    while(left>=0&&right<len &&s.charAt(left)==s.charAt(right)){
+        left--;
+        right++;
+    }
+    return s.substring(left+1,right);
+}
+    
+    public String longestPalindrome(String s) {
+        int n=s.length();
+        String ans="";
+
+        for(int i=0;i<s.length();i++){
+            String oddPalin=ExpandCentre(s,i,i,n);
+            if(oddPalin.length()>ans.length()){
+                ans=oddPalin;
+            }
+            String evenPalin=ExpandCentre(s,i,i+1,n);
+            if(evenPalin.length()>ans.length()){
+                ans=evenPalin;
+            }
+        }
+        return ans;
+
+
+        
+    }
+}
