@@ -1,0 +1,22 @@
+class Solution {
+    public int numJewelsInStones(String jewels, String stones) {
+        int count=0;
+        Map<Character,Integer>ch=new HashMap<>();
+        for(char c:stones.toCharArray()){//now we got frequencies
+            ch.put(c,ch.getOrDefault(c,0)+1);
+
+        }
+        char j[]=jewels.toCharArray();
+
+        for(int i=0;i<j.length;i++){
+            if(ch.containsKey(j[i])){
+                count+=ch.get(j[i]);
+            }
+        }
+        return count;
+
+
+
+        
+    }
+}
