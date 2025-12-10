@@ -1,0 +1,21 @@
+class Solution {
+    public int diagonalSum(int[][] mat) {
+        int m = mat.length;        // rows
+        int n = mat[0].length;     // columns
+        int sum = 0;
+
+        int min = Math.min(m, n);  // safe diagonal length
+
+        for (int i = 0; i < min; i++) {
+            sum += mat[i][i];             // primary diagonal
+            sum += mat[i][n - i - 1];     // secondary diagonal
+        }
+
+        // If both diagonals meet and counted twice, subtract it
+        if (m == n && n % 2 == 1) {
+            sum -= mat[n/2][n/2];
+        }
+
+        return sum;
+    }
+}
