@@ -1,0 +1,19 @@
+class Solution {
+    public int countDistinctIntegers(int[] nums) {
+        Set<Integer>s=new HashSet<>();
+        for(int i:nums){
+            s.add(i);
+            s.add(rev(i));
+        }
+        return s.size();
+    }
+    public int rev(int n){//123
+         int revv=0;
+        while(n!=0){
+           int d= n%10;
+            revv=revv*10+d;
+           n/=10;
+        }
+        return revv;
+    }
+}
