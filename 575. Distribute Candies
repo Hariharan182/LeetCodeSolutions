@@ -1,0 +1,13 @@
+class Solution {
+    public int distributeCandies(int[] candyType) {
+        int n=candyType.length/2;
+        Set<Integer>sh=new HashSet<>();
+        for(int i:candyType){
+            sh.add(i);
+            if(sh.size()==n){
+                break;
+            }
+        }
+        return sh.size();
+    }
+}
