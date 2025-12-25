@@ -1,0 +1,19 @@
+
+class Solution {
+    public long maximumHappinessSum(int[] happiness, int k) {
+        Arrays.sort(happiness);          // get largest values easily
+        long sum = 0;
+        int r = 0;
+
+        for (int i = happiness.length - 1; i >= 0 && k > 0; i--) {
+            int curr = happiness[i] - r;
+            if (curr <= 0) break;
+
+            sum += curr;
+            r++;
+            k--;
+        }
+
+        return sum;
+    }
+}
